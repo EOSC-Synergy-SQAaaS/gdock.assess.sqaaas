@@ -1,0 +1,58 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    www:
+      branch: master
+      repo: http://www.github.com/rvhonorato/gdock
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      www git:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-peach-beetle.sh
+        container: qc.acc_shaggy-burgundy-coral
+  QC.Doc:
+    repos:
+      www find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.goopy-yellow-frog.sh
+        container: qc.doc_shabby-indigo-lynx
+      www git:
+        commands:
+        - /usr/bin/env sh .sqa/script.lousy-chartreuse-wolf.sh
+        container: qc.doc_fuzzy-cornflower-buffalo
+      www markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.lovely-azure-eagle.sh
+        container: qc.doc_randy-eggplant-coral
+  QC.Lic:
+    repos:
+      www licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.whiny-taupe-cuttlefish.sh
+        container: qc.lic_sunny-maroon-rat
+  QC.Sec:
+    repos:
+      www bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.slimy-zucchini-panda.sh
+        container: qc.sec_leaky-olivine-flamingo
+  QC.Sty:
+    repos:
+      www flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.chewy-taupe-rabbit.sh
+        container: qc.sty_fuzzy-alizarin-molly
+  QC.Ver:
+    repos:
+      www get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.stuffy-indigo-kangaroo.sh
+        container: qc.ver_jumpy-peach-avocet
+timeout: 5400
